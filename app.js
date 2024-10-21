@@ -147,7 +147,7 @@ for (let poke of game.party) {
     console.log(poke.name)
 }
 
-console.log('\n')
+console.log('\n') // for easier console readability
 
 /*
 Exercise 9
@@ -164,6 +164,7 @@ for (let poke of pokemon) {
     if (poke.starter) {console.log(poke.name)}
 }
 
+console.log('\n') // for easier console readability
 
 /*
 Exercise 10
@@ -203,7 +204,7 @@ Solve Exercise 11 here:
 
 // modified to decrease pokeball count on catch
 game.catchPokemon = function(pokemonObj) {
-    if (game.items[1].quantity > 0) {     // negatives okay for exercise, but just to practice...
+    if (game.items[1].quantity > 0) {   // negatives okay for exercise, but just to practice...
         game.items[1].quantity--
         game.party.push(pokemonObj)
     } else {console.log('Out of Pokeballs!')}
@@ -244,3 +245,100 @@ game.gyms.forEach(
 // console.log(game.gyms)
 
 
+/*
+Exercise 13
+1. Create a `gymStatus` method in `game` to tally completed and incomplete gyms.
+2. How will you iterate through the `gyms` array and update the tally? Remember to log the final tally.
+
+This method should:
+  - Not accept any arguments.
+  - Initially create a constant `gymTally`, which is an object that has two 
+    properties: `completed` and `incomplete`, both of which are initially set to 0.
+  - Iterate through the objects in the `game.gyms` array and update the 
+    properties on `gymTally` as follows: 
+    - `completed` should count how many gyms in the array have a value of `true` 
+      for their `completed` property. 
+    - `incomplete` should count how many gyms in the array have a value of 
+      `false` for their `completed` property.
+  - Log the value of `gymTally`.
+  - The method should not return anything.
+
+For example, if five gym objects have a value of `true` on their `completed` property and three gym objects have a value of `false` on their `completed` property, the logged value would be: `{ completed: 5, incomplete: 3 }`.
+
+Solve Exercise 13 here:
+*/
+
+
+// defines a new method in game object and uses a forEach() loop to iterate and tally
+game.gymStatus = () => {
+    const gymTally = {completed: 0, incomplete: 0} // creates a temp object to be manipluated
+    game.gyms.forEach(
+        (gym) => {
+            if (gym.completed) {
+                gymTally.completed++
+            } else {gymTally.incomplete++}
+        }
+    )
+    console.log(gymTally) // logs the tally to the console after loop is complete (still part of method)
+}
+
+// calls method, which updates and prints gymTally variable
+game.gymStatus()
+
+console.log('\n') // for easier console readability
+
+/*
+Exercise 14
+1. Add a `partyCount` method to `game` that counts the number of Pokémon in your party.
+
+This method should:
+  - Not accept any arguments.
+  - Count the number of Pokemon in the party.
+  - return the found number of Pokemon in the party.
+
+Solve Exercise 14 here:
+*/
+
+// uses object version of arrow notation to define the function (i.e. method)
+game.partyCount = () => {
+    return game.party.length
+}
+
+/* 
+// needs () after "partyCount" as it's calling a method
+console.log(game.partyCount())
+ */
+
+
+/*
+Exercise 15
+1. Now, complete gyms with a difficulty below 8. Reflect on how this is similar to or different from the previous gym exercises.
+(change the value of `complete` in the qualifying objects from false to true).
+
+Solve Exercise 15 here:
+*/
+
+// updated to difficulty below 8 - does not touch already completed gyms
+game.gyms.forEach(
+    (gym) => {
+        if (gym.difficulty < 8 && gym.completed == false) {
+            gym.completed = true
+        }
+    }
+)
+
+game.gymStatus() // for testing execution of above loop
+
+console.log('\n') // for easier console readability
+
+/*
+Exercise 16
+1. Log the entire `game` object to the console. Take a moment to review the changes you've made throughout the exercises.
+
+
+Solve Exercise 16 here:
+*/
+
+console.log(game) // logs entire object; methods are logged as [Function (anonymous)]
+
+console.log('\n') // for easier console readability
